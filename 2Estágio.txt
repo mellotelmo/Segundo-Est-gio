@@ -1,0 +1,69 @@
+  CREATE DATABASE CORTE_DE_VIDRO
+   USE DATABASE CORTE_DE_VIDRO
+	CREATE TABLE `Usuário` (
+		`Login` varchar(12) NOT NULL,
+		`Senha` INT(10) NOT NULL,
+		`Email` varchar(30) NOT NULL,
+		`Nacionalidade` varchar(30) NOT NULL,
+		PRIMARY KEY (`Login`)
+	);
+	
+	CREATE TABLE `Criador` (
+		`Login` varchar(30) NOT NULL,
+		`Senha` varchar(20) NOT NULL,
+		`Email` varchar(30) NOT NULL,
+		`Nacionalidade` varchar(15) NOT NULL,		PRIMARY KEY (`Login`)
+	);
+	
+	CREATE TABLE `Atributo_da_Placa` (
+		`ID_Chapa` INT(32) NOT NULL AUTO_INCREMENT,
+		`Largura_chapa` FLOAT(6) NOT NULL,
+		`Altura_chapa` FLOAT(6) NOT NULL,
+		`Largura_corte` FLOAT(6) NOT NULL,
+		`Altura_corte` FLOAT(6) NOT NULL,
+		`QTD_peças` DECIMAL(10) NOT NULL,
+		PRIMARY KEY (`ID_Chapa`)
+	);
+	
+	CREATE TABLE `Placas_Salvas` (
+		`ID_Salvos` INT(32) NOT NULL AUTO_INCREMENT,
+		`Usuário` varchar(30),
+		`Chapa1` varchar(32),
+		`Chapa2` varchar(32),
+		`Chapa3` varchar(32),
+		`Chapa4` varchar(32),
+		PRIMARY KEY (`ID_Salvos`)
+	);
+	
+	
+	
+	ALTER TABLE `Placas_Salvas` ADD CONSTRAINT `Placas_Salvas_fk0` FOREIGN KEY (`Chapa1`) REFERENCES `Atributo_da_Placa`(`ID_Chapa`);
+	
+	ALTER TABLE `Placas_Salvas` ADD CONSTRAINT `Placas_Salvas_fk1` FOREIGN KEY (`Chapa2`) REFERENCES `Atributo_da_Placa`(`ID_Chapa`);
+	
+	ALTER TABLE `Placas_Salvas` ADD CONSTRAINT `Placas_Salvas_fk2` FOREIGN KEY (`Chapa3`) REFERENCES `Atributo_da_Placa`(`ID_Chapa`);
+	
+	ALTER TABLE `Placas_Salvas` ADD CONSTRAINT `Placas_Salvas_fk3` FOREIGN KEY (`Chapa4`) REFERENCES `Atributo_da_Placa`(`ID_Chapa`);
+	
+	
+	ALTER TABLE `Usuários_Salvos` ADD CONSTRAINT `Usuários_Salvos_fk1` FOREIGN KEY (`Chapa Utilizada`) REFERENCES `Placas_Salvas`(`ID_Salvos`);
+------------------------Inserindo Valores---------------------------
+insert into atributo_da_placa values(1,30,20,10,20,2);
+insert into criador (`creator`, `wefdscx`, `criador@gmail.com`, `Brasileiro`);
+insert into placas_salvas(1,30x30,20x20,40x40,50x50,null);
+insert into placas_salvas(Chapa1,Chapa2,Chapa3,Chapa4,Usuário) values (30x30,20x30,40x40,50x50, null);
+insert into placas_salvas(Chapa1,Chapa2,Chapa3,Chapa4,Usuário) values (null, null, null, null, user1);
+insert into placas_salvas(Chapa1,Chapa2,Chapa3,Chapa4,Usuário) values (30x30,20x30,40x40,50x50, user2);
+insert into placas_salvas(Chapa1,Chapa2,Chapa3,Chapa4,Usuário) values (30x30,20x30,40x40,50x50, use1);
+insert into placas_salvas(Chapa1,Chapa2,Chapa3,Chapa4,Usuário) values (30x30,320x30,40x40,50x50, user1);
+insert into placas_salvas(Chapa1,Chapa2,Chapa3,Chapa4,Usuário) values (30x30,20x320,40x40,50x50, userl);
+insert into usuário(Login,Senha,Email,Nacionalidade) values (user1,1010,user@gmail.com,Campina Grande - Paraíba);
+insert into usuário(Login,Senha,Email,Nacionalidade) values (user2,178010,user2@gmail.com,Campina Grande - Paraíba);
+insert into usuário(Login,Senha,Email,Nacionalidade) values (user21,101120,user2@gmail.com,Campina Grande - Paraíba);
+
+---------------Seleção dos usuários nascidos em Campia Grande---------
+Select Login from usuários where Nacionalidade like ‘%Campina Grande%’;
+----------------Seleção dos usuários user1----------------------------
+Select count(usuário) as ‘user1’ from placas_salvas;
+
+
